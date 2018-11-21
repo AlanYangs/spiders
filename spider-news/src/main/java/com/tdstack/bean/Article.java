@@ -5,7 +5,11 @@ package com.tdstack.bean;
  */
 public class Article extends BaseBean {
 
-    private String objectId;
+    private String objectId;//系统字段，不要set
+
+    private String updatedAt;//系统字段，不要set
+
+    private String createdAt;//系统字段，不要set
 
     private String articleId;
 
@@ -23,18 +27,12 @@ public class Article extends BaseBean {
 
     private String category;
 
-    private String updatedAt;
-
-    private String createdAt;
+    private String publishTime;
 
     private int status;
 
     public String getObjectId() {
         return objectId;
-    }
-
-    public void setObjectId(String id) {
-        this.objectId = id;
     }
 
     public String getArticleId() {
@@ -101,20 +99,20 @@ public class Article extends BaseBean {
         this.category = category;
     }
 
+    public String getPublishTime() {
+        return publishTime;
+    }
+
+    public void setPublishTime(String publishTime) {
+        this.publishTime = publishTime;
+    }
+
     public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     public String getCreatedAt() {
         return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
     }
 
     public int getStatus() {
