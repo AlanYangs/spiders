@@ -1,0 +1,10 @@
+E:\workspace\IDEA\demo\demo-spider\spider-news\src\main\java\com\tdstack\bean\Article.java
+E:\workspace\IDEA\demo\demo-spider\spider-news\src\main\java\com\tdstack\utils\ReflectUtils.java
+E:\workspace\IDEA\demo\demo-spider\spider-news\src\main\java\com\tdstack\bean\BaseBean.java
+E:\workspace\IDEA\demo\demo-spider\spider-news\src\main\java\com\tdstack\core\dao\impl\AbstractCouldDBServiceImpl.java
+E:\workspace\IDEA\demo\demo-spider\spider-news\src\main\java\com\tdstack\core\http\HttpResult.java
+E:\workspace\IDEA\demo\demo-spider\spider-news\src\main\java\com\tdstack\core\parser\CommonParser.java
+E:\workspace\IDEA\demo\demo-spider\spider-news\src\main\java\com\tdstack\core\parser\impl\CSDNNewsParser.java
+E:\workspace\IDEA\demo\demo-spider\spider-news\src\main\java\com\tdstack\core\http\HttpRequest.java
+E:\workspace\IDEA\demo\demo-spider\spider-news\src\main\java\com\tdstack\core\dao\CouldDBService.java
+E:\workspace\IDEA\demo\demo-spider\spider-news\src\main\java\com\tdstack\core\dao\impl\ArticleCouldDBServiceImpl.java
