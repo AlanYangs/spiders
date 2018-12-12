@@ -30,6 +30,9 @@ public class CSDNNewsProcessor extends CommonProcessor<Article> {
     @Autowired
     private ArticleCouldDBService articleCouldDBService;
 
+    @Autowired
+    private HttpRequest httpRequest;
+
     @Override
     public HttpResult request() {
         Map<String, Object> headers = new HashMap<>();
@@ -38,7 +41,7 @@ public class CSDNNewsProcessor extends CommonProcessor<Article> {
             headers.put("User-Agent", userAgentList.get(index));
         }
 
-        HttpResult result = new HttpRequest(API_NEWS_URL).setHeaders(headers).doGet();
+        HttpResult result = httpRequest.setUrl(API_NEWS_URL).setHeaders(headers).doGet();
         return result;
     }
 

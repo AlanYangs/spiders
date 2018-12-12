@@ -1,5 +1,7 @@
 package com.tdstack.core.http;
 
+import com.tdstack.core.proxy.KuaidailiFreeProxyService;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -17,6 +19,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.net.ssl.SSLContext;
@@ -25,16 +29,14 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by yangangui on 2017/12/16.
  */
 @Service("httpRequest")
 public class HttpRequest {
+    private static Logger logger = Logger.getLogger(HttpRequest.class);
 
     private String url;
 
@@ -43,11 +45,17 @@ public class HttpRequest {
     private String content;
     private ContentType contentType;
 
+    private boolean isNewConstruct = false;
+
+    @Autowired
+    private KuaidailiFreeProxyService kuaidailiFreeProxyService;
+
     public HttpRequest() {
     }
 
     public HttpRequest(String url) {
         this.url = url;
+        isNewConstruct = true;
     }
 
     public HttpRequest setUrl(String url) {
@@ -71,9 +79,25 @@ public class HttpRequest {
         return this;
     }
 
-    public static CloseableHttpClient getSSLHttpClient() throws Exception {
-        //请求配置，设置链接超时和读取超时
-        RequestConfig config = RequestConfig.custom().setConnectTimeout(30000).setSocketTimeout(30000).build();
+    public CloseableHttpClient getSSLHttpClient() throws Exception {
+        //设置代理IP、端口、协议
+        RequestConfig config = null;
+        if (kuaidailiFreeProxyService != null){
+            List<HttpHost> proxyHosts = kuaidailiFreeProxyService.getProxy();
+            if (proxyHosts != null && !proxyHosts.isEmpty()) {
+                int index = new Random().nextInt(proxyHosts.size());
+                //请求配置，设置链接超时和读取超时
+                config = RequestConfig.custom().setProxy(proxyHosts.get(index)).setConnectTimeout(30000).setSocketTimeout(30000).build();
+            }
+        }
+
+        if (config == null) {
+            if (!isNewConstruct) {
+                logger.error("proxy list is empty...");
+            }
+            config = RequestConfig.custom().setConnectTimeout(30000).setSocketTimeout(30000).build();
+        }
+
         try {
             SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
                 public boolean isTrusted(X509Certificate[] paramArrayOfX509Certificate, String paramString) throws CertificateException {

@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by yangangui on 2018/11/23.
@@ -45,11 +46,15 @@ public class AsyncProcessTask implements ApplicationContextAware {
             return;
         }
 
-        ExecutorService es = Executors.newFixedThreadPool(processors.size() > 10 ? 10 : processors.size());
+        ExecutorService es = Executors.newFixedThreadPool(5);
         for (CommonProcessor processor : processors) {
             es.submit(processor);
         }
         es.shutdown();
+        try {
+            es.awaitTermination(60, TimeUnit.MINUTES);//最大等待60min
+        } catch (InterruptedException e) {
+        }
     }
 
     public List<CommonProcessor> getAllProcessors(){
