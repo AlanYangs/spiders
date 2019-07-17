@@ -24,8 +24,8 @@ import java.util.Map;
 public abstract class AbstractCouldDBService<T extends BaseBean> implements CouldDBService <T>{
     private static Logger logger = Logger.getLogger(AbstractCouldDBService.class);
 
-    private static final String APP_ID = "68ab2056a549e0f640dfc1e801bf6915";
-    private static final String API_KEY = "f8eee065e9e011ecd7e98e4256373629";
+    private static final String APP_ID = "your appId";
+    private static final String API_KEY = "your key";
 
     private static final String API_HOST_BASE = "https://api2.bmob.cn/1/";
 
