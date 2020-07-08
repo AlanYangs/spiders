@@ -1,5 +1,6 @@
 package com.alany.spider;
 
+import com.alany.spider.common.BizEnum;
 import com.alany.spider.common.SpringContext;
 import com.alany.spider.core.task.AsyncProcessTask;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +16,7 @@ public class SpiderApplication {
 		AsyncProcessTask asyncProcessTask = SpringContext.getBean(AsyncProcessTask.class);
 		asyncProcessTask.initProxy();
 		Thread.sleep(1000 * 30);
-		asyncProcessTask.startAllProcessors();
+		asyncProcessTask.startProcessorsByBusiness(BizEnum.tabobao.getName());
 	}
 
 }

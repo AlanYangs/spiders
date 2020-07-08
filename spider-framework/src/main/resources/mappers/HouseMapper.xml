@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.alany.spider.core.dao.mapper.HouseMapper">
+	
+    <insert id="com.alany.spider.core.dao.mapper.HouseMapper.batchInsert" parameterType="com.alany.spider.bean.HouseBean">
+        INSERT INTO T_HOUSE (
+			FSOURCE_NAME ,
+			FITEM_ID ,
+			FCITY ,
+			FLOCATION ,
+			FADDRESS ,
+			FITEM_URL ,
+			FAREA_SIZE ,
+			FPRICE ,
+			FMARKET_TOTAL_PRICE ,
+			FSELL_TOTAL_PRICE ,
+			FSELL_STATUS ,
+			FSELL_DATE ,
+			FCREATE_TIME ,
+			FUPDATE_TIME
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+           (
+        	#{item.sourceName} ,
+        	#{item.itemId} ,
+        	#{item.city} ,
+        	#{item.location} ,
+			#{item.address} ,
+        	#{item.itemUrl} ,
+        	#{item.areaSize} ,
+        	#{item.price} ,
+        	#{item.marketTotalPrice} ,
+        	#{item.sellTotalPrice} ,
+        	#{item.sellStatus} ,
+        	#{item.sellDate} ,
+        	NOW() ,
+        	NOW() 
+        )
+        </foreach>
+    </insert>
+
+</mapper>

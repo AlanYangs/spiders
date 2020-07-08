@@ -1,5 +1,7 @@
 package com.alany.spider.utils;
 
+import com.alany.spider.common.AddressType;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,5 +33,10 @@ public class StringUtils {
 
     public static boolean isNotBlank(String str) {
         return !isBlank(str);
+    }
+
+    public static void main(String[] args) {
+        String val = AddressType.regexAddress("位于广州市增城区新塘镇荔新十二路99号8栋1306房", AddressType.city);
+        System.out.println(val);
     }
 }

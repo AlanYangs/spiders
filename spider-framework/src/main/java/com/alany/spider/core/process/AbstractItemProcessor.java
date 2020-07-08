@@ -6,6 +6,7 @@ import com.alany.spider.common.SpringContext;
 import com.alany.spider.core.http.UserAgentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DuplicateKeyException;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -76,6 +77,8 @@ public abstract class AbstractItemProcessor<T> implements Runnable{
         LOGGER.info("executing processor: " + executeContent.toString());
         try {
             process();
+        } catch (DuplicateKeyException de) {
+            LOGGER.warn(de.getMessage());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
