@@ -5,7 +5,7 @@
 - 基于HttpClient的HTTP请求封装
 - 多线程并发爬取
 - 任务调度
-- 免费云数据库模块以及集成了Mybatis支持数量入库MySQL数据库
+- 免费云数据库模块以及集成了Mybatis支持入库MySQL数据库
 
 #### 框架架构图：
 ![](https://upload-images.jianshu.io/upload_images/2951233-eee760f591f37d51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
